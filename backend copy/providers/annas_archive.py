@@ -11,7 +11,7 @@ class AnnasArchiveProvider(BookProvider):
         self.source_name = "Anna's Archive"
 
     async def search(self, query: str, limit: int = 20) -> List[schemas.BookDetails]:
-        url = f"{self.base_url}/search?q={query}"
+        url = f"{self.base_url}/search?q={query}&lang=pt"
         
         try:
             async with httpx.AsyncClient(timeout=15.0) as client:

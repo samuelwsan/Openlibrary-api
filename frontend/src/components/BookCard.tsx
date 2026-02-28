@@ -70,8 +70,6 @@ export default function BookCard({ book }: { book: Book }) {
                 {book.preview_url && (
                     <a
                         href={book.preview_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="flex-1 flex items-center justify-center py-2.5 px-4 rounded-xl text-sm font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/10 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] active:scale-95"
                     >
                         <ExternalLink className="w-4 h-4 mr-2" />
@@ -82,8 +80,6 @@ export default function BookCard({ book }: { book: Book }) {
                 {book.download_url && (
                     <a
                         href={book.download_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="flex-1 flex items-center justify-center py-2.5 px-4 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] active:scale-95"
                     >
                         <Download className="w-4 h-4 mr-2" />
