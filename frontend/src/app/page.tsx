@@ -19,7 +19,7 @@ export default function Home() {
 
     try {
       // Connect to FastAPI backend
-      const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+      const response = await fetch(`https://openlibrary-api-t91i.onrender.com/api/search?query=${encodeURIComponent(query)}`);
       if (!response.ok) {
         throw new Error("Erro ao buscar livros");
       }
