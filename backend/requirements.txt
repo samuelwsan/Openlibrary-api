@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+httpx
+pytest
+pyTelegramBotAPI
+python-dotenv
+beautifulsoup4
