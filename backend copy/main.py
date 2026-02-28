@@ -11,6 +11,7 @@ from database import engine, get_db
 
 from providers.gutenberg import GutenbergProvider
 from providers.openlibrary import OpenLibraryProvider
+from providers.annas_archive import AnnasArchiveProvider
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -25,7 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-providers = [GutenbergProvider(), OpenLibraryProvider()]
+providers = [GutenbergProvider(), OpenLibraryProvider(), AnnasArchiveProvider()]
 
 
 @app.get("/")
