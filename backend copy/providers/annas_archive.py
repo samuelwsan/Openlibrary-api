@@ -1,7 +1,7 @@
 import httpx
 import re
 from typing import List
-from ..schemas import BookDetails
+import schemas
 from .base import BookProvider
 
 
@@ -10,7 +10,7 @@ class AnnasArchiveProvider(BookProvider):
         self.base_url = "https://annas-archive.li"
         self.source_name = "Anna's Archive"
 
-    async def search(self, query: str, limit: int = 20) -> List[BookDetails]:
+    async def search(self, query: str, limit: int = 20) -> List[schemas.BookDetails]:
         url = f"{self.base_url}/search?q={query}"
         
         try:
@@ -25,7 +25,7 @@ class AnnasArchiveProvider(BookProvider):
             print(f"Error fetching from Anna's Archive: {e}")
             return []
 
-    def _parse_html(self, html: str) -> List[BookDetails]:
+    def _parse_html(self, html: str) -> List[schemas.BookDetails]:
         books = []
         # split by item container
         parts = html.split('<div class="flex  pt-3 pb-3 border-b')
@@ -73,7 +73,7 @@ class AnnasArchiveProvider(BookProvider):
                 if "Portuguese" in summary or "pt" in summary: lang = "pt"
                 
             books.append(
-                BookDetails(
+                schemas.BookDetails(
                     id=f"anna_{md5}",
                     title=title,
                     author=author,
