@@ -3,7 +3,7 @@ import { Book, Library, Settings, Flame, GraduationCap, Image as ImageIcon, Spar
 
 export default function Sidebar() {
     return (
-        <aside className="w-64 h-screen bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl border-r border-gray-200 dark:border-gray-800 flex flex-col p-6 sticky top-0 transition-colors duration-300">
+        <aside className="w-64 hidden md:flex min-w-[256px] h-screen bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl border-r border-gray-200 dark:border-gray-800 flex-col p-6 sticky top-0 transition-colors duration-300">
             <div className="flex items-center gap-3 mb-10">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
                     <Book className="w-5 h-5 text-white" />
