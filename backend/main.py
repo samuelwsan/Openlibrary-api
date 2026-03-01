@@ -172,19 +172,28 @@ async def search_books_by_category(
     return all_books
 
 
+import json
+import os
+
+PRELOADED_BOOKS_PATH = os.path.join(os.path.dirname(__file__), "preloaded_books.json")
+
+def load_preloaded_books():
+    try:
+        with open(PRELOADED_BOOKS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Error loading preloaded books: {e}")
+        return {"destaques": [], "fantasy": []}
+
 @app.get("/api/destaques", response_model=List[schemas.BookDetails])
 def get_destaques(db: Session = Depends(get_db)) -> Any:
-    # We now fetch strictly from the fast local SQLite cache loaded from the Best Books CSV 
-    # to avoid Render startup timeouts.
-    books = db.query(models.BookCache).filter(models.BookCache.source == "csv_destaques").limit(30).all()
-    return books
-
+    data = load_preloaded_books()
+    return data.get("destaques", [])[:12]
 
 @app.get("/api/fantasy-destaques", response_model=List[schemas.BookDetails])
 def get_fantasy_destaques(db: Session = Depends(get_db)) -> Any:
-    # Fetch the fantasy books we imported into the cache
-    books = db.query(models.BookCache).filter(models.BookCache.source == "csv_best_books").limit(30).all()
-    return books
+    data = load_preloaded_books()
+    return data.get("fantasy", [])[:30]
 
 
 if __name__ == "__main__":
