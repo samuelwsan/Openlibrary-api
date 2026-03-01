@@ -5,6 +5,7 @@ import SearchBar from "@/components/SearchBar";
 import BookCard, { Book } from "@/components/BookCard";
 import CategoryTable from "@/components/CategoryTable";
 import TrendingList from "@/components/TrendingList";
+import FantasyList from "@/components/FantasyList";
 import StoicHeroBanner from "@/components/StoicHeroBanner";
 import HeaderNav from "@/components/HeaderNav";
 import { Search } from "lucide-react";
@@ -140,6 +141,9 @@ function LibraryContent() {
         <>
           <StoicHeroBanner />
           <TrendingList />
+          <div className="mt-8 md:mt-12">
+            <FantasyList />
+          </div>
         </>
       )}
 

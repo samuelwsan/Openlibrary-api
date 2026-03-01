@@ -247,6 +247,13 @@ async def get_destaques(db: Session = Depends(get_db)) -> Any:
     return final_list[:12] # Return up to 12
 
 
+@app.get("/api/fantasy-destaques", response_model=List[schemas.BookDetails])
+def get_fantasy_destaques(db: Session = Depends(get_db)) -> Any:
+    # Fetch the fantasy books we imported into the cache
+    books = db.query(models.BookCache).filter(models.BookCache.source == "csv_best_books").limit(30).all()
+    return books
+
+
 if __name__ == "__main__":
     import uvicorn
 
