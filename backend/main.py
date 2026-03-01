@@ -208,10 +208,32 @@ async def get_destaques(db: Session = Depends(get_db)) -> Any:
         
     # Otherwise, we need to search for the missing ones using the providers
     all_fetched_books = []
-    # To not overload, just fetch 1 result per query
+    
+    import time
+    start_time = time.time()
+    
+    # To not overload and prevent extreme latency on cold start, fetch concurrently with a hard limit
+    # We will only allow a maximum of 15 seconds for this entire block
+    
     for mq in missing_queries:
+        if time.time() - start_time > 15.0:
+            print("Timeout reached filling cache, returning early.")
+            break
+            
         tasks = [provider.search(mq, 2) for provider in providers]
-        provider_results = await asyncio.gather(*tasks, return_exceptions=True)
+        # Use asyncio.wait to enforce a short timeout per query
+        done, pending = await asyncio.wait(tasks, timeout=5.0)
+        
+        provider_results = []
+        for task in done:
+            try:
+                res = task.result()
+                provider_results.append(res)
+            except Exception as e:
+                print(f"Error fetching {mq}: {e}")
+                
+        for task in pending:
+            task.cancel()
         
         for res in provider_results:
             if isinstance(res, list) and len(res) > 0:
