@@ -65,27 +65,27 @@ export default function Sidebar() {
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-2">
                         Filtros
                     </p>
-                    <div className="flex items-center justify-between px-3 py-2">
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                    <Link href="/?q=livre" className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800/50 rounded-lg transition-colors group cursor-pointer">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
                             <User className="w-4 h-4" />
                             Público Geral
                         </span>
                         <div className="w-10 h-5 bg-blue-500 rounded-full flex items-center p-1 shadow-inner cursor-pointer">
                             <div className="w-3.5 h-3.5 bg-white rounded-full translate-x-4.5 shadow-sm"></div>
                         </div>
-                    </div>
-                    <div className="flex items-center justify-between px-3 py-2">
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                    </Link>
+                    <Link href="/?q=dark" className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800/50 rounded-lg transition-colors group cursor-pointer">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
                             <Flame className="w-4 h-4 text-red-500" />
                             Conteúdo Adulto
                         </span>
-                        <div className="w-10 h-5 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 shadow-inner cursor-pointer">
-                            <div className="w-3.5 h-3.5 bg-white rounded-full shadow-sm transition-transform"></div>
+                        <div className="w-10 h-5 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 shadow-inner cursor-pointer group-hover:bg-red-500 transition-colors">
+                            <div className="w-3.5 h-3.5 bg-white rounded-full shadow-sm transition-transform group-hover:translate-x-4.5"></div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
-                <Link href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white transition-all">
+                <Link href="/?q=configuracoes" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white transition-all">
                     <Settings className="w-5 h-5" />
                     Configurações
                 </Link>
