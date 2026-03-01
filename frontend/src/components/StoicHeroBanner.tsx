@@ -41,7 +41,7 @@ export default function StoicHeroBanner() {
     }, []);
 
     return (
-        <div className="relative w-full h-[60vh] md:h-[50vh] min-h-[400px] mb-12 rounded-3xl overflow-hidden shadow-2xl group flex items-end">
+        <div className="relative w-full h-[45vh] md:h-[50vh] min-h-[320px] md:min-h-[400px] mb-8 md:mb-12 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl group flex items-end">
             {/* Background Image / Netflix Style Gradient */}
             <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
@@ -55,16 +55,16 @@ export default function StoicHeroBanner() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-transparent to-transparent dark:from-black" />
 
             {/* Content */}
-            <div className="relative z-10 p-8 md:p-12 w-full max-w-4xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-bold rounded-full bg-red-600/20 text-red-500 border border-red-600/30 backdrop-blur-md uppercase tracking-widest">
-                    <BookOpen className="w-4 h-4" /> Destaque do Dia
+            <div className="relative z-10 p-5 md:p-12 w-full max-w-4xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 md:mb-6 text-[10px] md:text-xs font-bold rounded-full bg-red-600/20 text-red-500 border border-red-600/30 backdrop-blur-md uppercase tracking-widest">
+                    <BookOpen className="w-3 h-3 md:w-4 md:h-4" /> Destaque do Dia
                 </div>
 
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-white mb-2 md:mb-4 leading-tight">
                     &quot;{quote.text}&quot;
                 </h1>
 
-                <p className="text-lg md:text-xl text-gray-300 font-medium mb-8">
+                <p className="text-sm md:text-xl text-gray-300 font-medium mb-6 md:mb-8">
                     — {quote.author}, <span className="italic text-gray-400">{quote.book}</span>
                 </p>
 

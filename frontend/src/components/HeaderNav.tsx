@@ -45,20 +45,20 @@ export default function HeaderNav() {
     }, []);
 
     return (
-        <header className="sticky top-0 z-10 bg-white/70 dark:bg-[#141414]/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 md:px-8 py-4 md:py-0 flex flex-col md:flex-row items-center justify-between md:h-20 gap-4 transition-colors duration-300">
-            <div className="w-full md:flex-1 max-w-2xl relative group flex-shrink-0">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Search className="w-5 h-5 text-gray-400 group-focus-within:text-red-600 transition-colors" />
+        <header className="sticky top-0 z-10 bg-white/70 dark:bg-[#141414]/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 md:px-8 py-4 md:py-0 flex flex-col md:flex-row items-center justify-between md:h-16 gap-3 transition-colors duration-300">
+            {/* Mobile Logo */}
+            <div className="md:hidden flex items-center justify-between w-full mb-1">
+                <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg shadow-red-600/30">
+                        <BookOpen className="w-4 h-4 text-white" />
+                    </div>
+                    <h1 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
+                        OpenLibrary<span className="font-light">FREE</span>
+                    </h1>
                 </div>
-                <input
-                    type="text"
-                    id="search"
-                    className="w-full bg-gray-100 dark:bg-gray-800/50 border border-transparent focus:border-red-600/50 focus:bg-white dark:focus:bg-[#141414] focus:ring-4 focus:ring-red-600/10 rounded-2xl py-3 pl-12 pr-4 text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 outline-none transition-all shadow-sm"
-                    placeholder="Busque por livros, autores ou conteúdos no acervo livre..."
-                />
             </div>
 
-            <nav className="w-full md:w-auto md:ml-8 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0 snap-x">
+            <nav className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0 snap-x">
                 {loading ? (
                     <div className="flex gap-2">
                         {[1, 2, 3].map((i) => (
