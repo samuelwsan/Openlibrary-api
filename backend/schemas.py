@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 
@@ -24,3 +24,20 @@ class BookDetails(BookBase):
 
 class BookCache(BookBase):
     created_at: datetime
+
+
+class CategoryBase(BaseModel):
+    nome: str
+    cor: Optional[str] = None
+    adulto: Optional[bool] = False
+
+
+class Category(CategoryBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+
+class CategoryList(BaseModel):
+    categorias: List[Category]

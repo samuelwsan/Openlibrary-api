@@ -105,6 +105,22 @@ def get_book_details(book_id: str, db: Session = Depends(get_db)) -> Any:
     return book
 
 
+@app.get("/api/categorias", response_model=schemas.CategoryList)
+def get_categorias(db: Session = Depends(get_db)) -> dict:
+    categories = db.query(models.Category).all()
+    if not categories:
+        default_categories = [
+            models.Category(nome="Fantasia", cor="#8b5cf6", adulto=False),
+            models.Category(nome="Dark", cor="#1f2937", adulto=True),
+            models.Category(nome="Estudo", cor="#3b82f6", adulto=False)
+        ]
+        db.add_all(default_categories)
+        db.commit()
+        categories = db.query(models.Category).all()
+
+    return {"categorias": categories}
+
+
 if __name__ == "__main__":
     import uvicorn
 
