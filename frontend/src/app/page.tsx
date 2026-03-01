@@ -40,9 +40,12 @@ function LibraryContent() {
     setBooks([]);
 
     try {
-      const response = await fetch(`https://openlibrary-api-t91i.onrender.com/api/categoria/${encodeURIComponent(category)}`);
-      // Use local backend if standard render is failing
-      // const response = await fetch(`http://localhost:8000/api/categoria/${encodeURIComponent(category)}`);
+      const apiUrl = process.env.NODE_ENV === "production"
+        ? "https://openlibrary-api-t91i.onrender.com"
+        : "http://localhost:8000";
+
+      const response = await fetch(`${apiUrl}/api/categoria/${encodeURIComponent(category)}`);
+
       if (!response.ok) {
         throw new Error("Erro ao buscar categoria");
       }
@@ -78,8 +81,11 @@ function LibraryContent() {
     setBooks([]);
 
     try {
-      // Connect to FastAPI backend
-      const response = await fetch(`https://openlibrary-api-t91i.onrender.com/api/search?query=${encodeURIComponent(query)}`);
+      const apiUrl = process.env.NODE_ENV === "production"
+        ? "https://openlibrary-api-t91i.onrender.com"
+        : "http://localhost:8000";
+
+      const response = await fetch(`${apiUrl}/api/search?query=${encodeURIComponent(query)}`);
       if (!response.ok) {
         throw new Error("Erro ao buscar livros");
       }
