@@ -69,8 +69,10 @@ async def search_books(
         if isinstance(res, list):
             all_books.extend(res)
 
+    final_books = all_books[:limit]
+
     # Save to SQLite cache
-    for book in all_books:
+    for book in final_books:
         existing = (
             db.query(models.BookCache).filter(models.BookCache.id == book.id).first()
         )
@@ -94,7 +96,7 @@ async def search_books(
 
     db.commit()
 
-    return all_books[:limit]
+    return final_books
 
 
 @app.get("/api/books/{book_id}", response_model=schemas.BookDetails)
@@ -119,6 +121,55 @@ def get_categorias(db: Session = Depends(get_db)) -> dict:
         categories = db.query(models.Category).all()
 
     return {"categorias": categories}
+
+
+@app.get("/api/categoria/{nome}", response_model=List[schemas.BookDetails])
+async def search_books_by_category(
+    nome: str, db: Session = Depends(get_db)
+) -> Any:
+    # Fetch up to 100 books for this category. We re-use the providers.
+    query = f"subject:{nome}" if "openlibrary" in [p.__class__.__name__.lower() for p in providers] else nome
+    limit = 100
+    
+    tasks = [provider.search(query, limit) for provider in providers]
+    provider_results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    all_books: List[schemas.BookDetails] = []
+
+    for res in provider_results:
+        if isinstance(res, Exception):
+            print(f"Provider error: {res}")
+            continue
+        if isinstance(res, list):
+            all_books.extend(res)
+
+    final_books = all_books[:limit]
+
+    # Save to SQLite cache
+    for book in final_books:
+        existing = (
+            db.query(models.BookCache).filter(models.BookCache.id == book.id).first()
+        )
+        if not existing:
+            new_book = models.BookCache(
+                id=book.id,
+                title=book.title,
+                author=book.author,
+                language=book.language,
+                source=book.source,
+                download_url=book.download_url,
+                preview_url=book.preview_url,
+                cover_url=book.cover_url,
+                summary=book.summary,
+            )
+            db.add(new_book)
+        else:
+            existing.title = book.title  # type: ignore[assignment]
+            existing.cover_url = book.cover_url  # type: ignore[assignment]
+
+    db.commit()
+
+    return all_books
 
 
 if __name__ == "__main__":

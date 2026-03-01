@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import SearchBar from "@/components/SearchBar";
 import BookCard, { Book } from "@/components/BookCard";
+import CategoryTable from "@/components/CategoryTable";
 import HeaderNav from "@/components/HeaderNav";
 import { Search } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -15,14 +16,45 @@ function LibraryContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isCategoryMode, setIsCategoryMode] = useState(false);
+
+  const categoryOptions = ["romance", "fantasia", "dark", "ficcao_cientifica"];
 
   useEffect(() => {
     if (q === 'favoritos') {
+      setIsCategoryMode(false);
       loadFavorites();
+    } else if (q && categoryOptions.includes(q.toLowerCase())) {
+      setIsCategoryMode(true);
+      fetchCategory(q.toLowerCase());
     } else if (q) {
+      setIsCategoryMode(false);
       handleSearch(q);
     }
   }, [q]);
+
+  const fetchCategory = async (category: string) => {
+    setIsLoading(true);
+    setHasSearched(true);
+    setError(null);
+    setBooks([]);
+
+    try {
+      const response = await fetch(`https://openlibrary-api-t91i.onrender.com/api/categoria/${encodeURIComponent(category)}`);
+      // Use local backend if standard render is failing
+      // const response = await fetch(`http://localhost:8000/api/categoria/${encodeURIComponent(category)}`);
+      if (!response.ok) {
+        throw new Error("Erro ao buscar categoria");
+      }
+      const data = await response.json();
+      setBooks(data);
+    } catch (err) {
+      console.error(err);
+      setError("Não foi possível carregar esta categoria.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const loadFavorites = () => {
     setIsLoading(true);
@@ -95,13 +127,17 @@ function LibraryContent() {
         </div>
       )}
 
-      {/* Updated Grid for Kindle Style */}
+      {/* Conditional Rendering: Grid vs Table */}
       {!isLoading && books.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-10">
-          {books.map((book) => (
-            <BookCard key={book.id} book={book} />
-          ))}
-        </div>
+        isCategoryMode ? (
+          <CategoryTable books={books} categoryName={q || ""} />
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-6 gap-y-10">
+            {books.map((book) => (
+              <BookCard key={book.id} book={book} />
+            ))}
+          </div>
+        )
       )}
 
       {/* Easter Egg Meme */}
