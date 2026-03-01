@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import SearchBar from "@/components/SearchBar";
 import BookCard, { Book } from "@/components/BookCard";
 import CategoryTable from "@/components/CategoryTable";
+import TrendingList from "@/components/TrendingList";
 import HeaderNav from "@/components/HeaderNav";
 import { Search } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -133,7 +134,12 @@ function LibraryContent() {
         </div>
       )}
 
-      {/* Conditional Rendering: Grid vs Table */}
+      {/* Conditional Rendering: Grid vs Table vs Empty State */}
+      {(!q || q === '') && !isCategoryMode && !isLoading && (
+        <TrendingList />
+      )}
+
+      {/* Conditionally render regular results if we have them */}
       {!isLoading && books.length > 0 && (
         isCategoryMode ? (
           <CategoryTable books={books} categoryName={q || ""} />

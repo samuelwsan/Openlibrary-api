@@ -172,6 +172,81 @@ async def search_books_by_category(
     return all_books
 
 
+@app.get("/api/destaques", response_model=List[schemas.BookDetails])
+async def get_destaques(db: Session = Depends(get_db)) -> Any:
+    # A curated list of highly sought-after famous books
+    top_books = [
+        "1984 George Orwell",
+        "Senhor dos Anéis O Retorno do Rei",
+        "O Hobbit",
+        "Harry Potter e a Pedra Filosofal",
+        "A Guerra dos Tronos",
+        "Duna Frank Herbert",
+        "O Pequeno Príncipe",
+        "Dom Casmurro"
+    ]
+    
+    # First, let's try to load them quickly from the database if they exist
+    # We do a fast LIKE search on the cache
+    cached_destaques = []
+    missing_queries = []
+    
+    for query in top_books:
+        # Just grab the main title word for simplicity in cache lookup
+        main_word = query.split()[0]
+        db_book = db.query(models.BookCache).filter(
+            models.BookCache.title.ilike(f"%{main_word}%")
+        ).first()
+        if db_book:
+            cached_destaques.append(db_book)
+        else:
+            missing_queries.append(query)
+            
+    # If we already have enough (e.g., at least 6 books) in cache, just return to be instant
+    if len(cached_destaques) >= 6 and not missing_queries:
+        return cached_destaques
+        
+    # Otherwise, we need to search for the missing ones using the providers
+    all_fetched_books = []
+    # To not overload, just fetch 1 result per query
+    for mq in missing_queries:
+        tasks = [provider.search(mq, 2) for provider in providers]
+        provider_results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        for res in provider_results:
+            if isinstance(res, list) and len(res) > 0:
+                # We just want the first good result that has a cover if possible
+                best_book = next((b for b in res if b.cover_url), res[0])
+                all_fetched_books.append(best_book)
+                break # Move to next query
+
+    # Save newly fetched books to cache
+    for book in all_fetched_books:
+        existing = db.query(models.BookCache).filter(models.BookCache.id == book.id).first()
+        if not existing:
+            new_book = models.BookCache(
+                id=book.id,
+                title=book.title,
+                author=book.author,
+                language=book.language,
+                source=book.source,
+                download_url=book.download_url,
+                preview_url=book.preview_url,
+                cover_url=book.cover_url,
+                summary=book.summary,
+            )
+            db.add(new_book)
+        else:
+            existing.title = book.title # type: ignore[assignment]
+            existing.cover_url = book.cover_url # type: ignore[assignment]
+            
+    db.commit()
+    
+    # Combine what we had in cache with what we just fetched
+    final_list = cached_destaques + all_fetched_books
+    return final_list[:12] # Return up to 12
+
+
 if __name__ == "__main__":
     import uvicorn
 
