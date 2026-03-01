@@ -45,15 +45,15 @@ export default function HeaderNav() {
     }, []);
 
     return (
-        <header className="sticky top-0 z-10 bg-white/70 dark:bg-[#0a0a0a]/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 md:px-8 py-4 md:py-0 flex flex-col md:flex-row items-center justify-between md:h-20 gap-4 transition-colors duration-300">
+        <header className="sticky top-0 z-10 bg-white/70 dark:bg-[#141414]/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 md:px-8 py-4 md:py-0 flex flex-col md:flex-row items-center justify-between md:h-20 gap-4 transition-colors duration-300">
             <div className="w-full md:flex-1 max-w-2xl relative group flex-shrink-0">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Search className="w-5 h-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                    <Search className="w-5 h-5 text-gray-400 group-focus-within:text-red-600 transition-colors" />
                 </div>
                 <input
                     type="text"
                     id="search"
-                    className="w-full bg-gray-100 dark:bg-gray-800/50 border border-transparent focus:border-purple-500/50 focus:bg-white dark:focus:bg-gray-900 focus:ring-4 focus:ring-purple-500/10 rounded-2xl py-3 pl-12 pr-4 text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 outline-none transition-all shadow-sm"
+                    className="w-full bg-gray-100 dark:bg-gray-800/50 border border-transparent focus:border-red-600/50 focus:bg-white dark:focus:bg-[#141414] focus:ring-4 focus:ring-red-600/10 rounded-2xl py-3 pl-12 pr-4 text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 outline-none transition-all shadow-sm"
                     placeholder="Busque por livros, autores ou conteúdos no acervo livre..."
                 />
             </div>

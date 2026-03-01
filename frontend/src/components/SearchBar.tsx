@@ -21,11 +21,11 @@ export default function SearchBar({ onSearch, isLoading = false }: SearchBarProp
     return (
         <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto relative group">
             {/* Dynamic Glow Effect */}
-            <div className={`absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 ${isFocused ? 'opacity-50 blur-md' : ''}`}></div>
+            <div className={`absolute -inset-1 bg-gradient-to-r from-red-700 via-red-600 to-pink-500 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 ${isFocused ? 'opacity-50 blur-md' : ''}`}></div>
 
-            <div className="relative flex items-center w-full h-16 sm:h-20 bg-slate-900/80 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl overflow-hidden transition-all duration-300 focus-within:border-purple-400/50 focus-within:bg-slate-900">
+            <div className="relative flex items-center w-full h-16 sm:h-20 bg-slate-900/80 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl overflow-hidden transition-all duration-300 focus-within:border-red-500/50 focus-within:bg-slate-900">
                 <div className="flex items-center justify-center pl-6 sm:pl-8">
-                    <Search className={`w-6 h-6 transition-colors duration-300 ${isFocused ? 'text-purple-400' : 'text-slate-400'}`} />
+                    <Search className={`w-6 h-6 transition-colors duration-300 ${isFocused ? 'text-red-500' : 'text-slate-400'}`} />
                 </div>
 
                 <input
@@ -44,7 +44,7 @@ export default function SearchBar({ onSearch, isLoading = false }: SearchBarProp
                     <button
                         type="submit"
                         disabled={isLoading || !query.trim()}
-                        className="flex items-center justify-center h-12 w-28 sm:h-14 sm:w-36 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 font-bold text-white shadow-[0_0_20px_rgba(124,58,237,0.4)] disabled:opacity-50 disabled:cursor-not-allowed hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 active:scale-95 group/btn overflow-hidden relative"
+                        className="flex items-center justify-center h-12 w-28 sm:h-14 sm:w-36 rounded-full bg-gradient-to-r from-red-600 to-red-600 font-bold text-white shadow-[0_0_20px_rgba(124,58,237,0.4)] disabled:opacity-50 disabled:cursor-not-allowed hover:from-red-700 hover:to-red-600 transition-all duration-300 active:scale-95 group/btn overflow-hidden relative"
                     >
                         {/* Button Shine Effect */}
                         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover/btn:animate-[shine_1.5s_ease-in-out_infinite]" />

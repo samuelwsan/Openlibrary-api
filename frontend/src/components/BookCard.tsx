@@ -56,18 +56,18 @@ export default function BookCard({ book }: { book: Book }) {
             onMouseLeave={() => setIsHovered(false)}
         >
             {/* Decorative Gradient Background on Hover */}
-            <div className={`absolute inset-0 bg-gradient-to-br from-purple-500/10 via-indigo-500/5 to-transparent opacity-0 transition-opacity duration-500 ${isHovered ? 'opacity-100' : ''}`} />
+            <div className={`absolute inset-0 bg-gradient-to-br from-red-600/10 via-red-700/5 to-transparent opacity-0 transition-opacity duration-500 ${isHovered ? 'opacity-100' : ''}`} />
 
             {/* Provider Badge */}
             <div className="absolute top-4 right-4 z-10">
-                <span className="inline-flex items-center px-3 py-1 text-xs font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 backdrop-blur-md shadow-sm">
+                <span className="inline-flex items-center px-3 py-1 text-xs font-bold rounded-full bg-red-700/20 text-red-300 border border-red-700/30 backdrop-blur-md shadow-sm">
                     {book.source}
                 </span>
             </div>
 
             <div className="flex-1 p-4 flex flex-col items-center text-center relative z-10">
                 {/* Elegant Cover Container */}
-                <div className={`relative w-full aspect-[2/3] mb-4 rounded-xl overflow-hidden shadow-md border border-gray-200 dark:border-white/10 transition-transform duration-500 ${isHovered ? 'scale-105 shadow-purple-500/30' : ''} bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:shadow-2xl`}>
+                <div className={`relative w-full aspect-[2/3] mb-4 rounded-xl overflow-hidden shadow-md border border-gray-200 dark:border-white/10 transition-transform duration-500 ${isHovered ? 'scale-105 shadow-red-600/30' : ''} bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:shadow-2xl`}>
                     {book.cover_url ? (
                         <img
                             src={book.cover_url}
@@ -89,18 +89,18 @@ export default function BookCard({ book }: { book: Book }) {
                 {/* Simulated Progress Bar (Kindle Style) */}
                 <div className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-full mb-3 overflow-hidden shadow-inner">
                     <div
-                        className="h-full bg-blue-500 dark:bg-purple-500 transition-all duration-1000"
+                        className="h-full bg-red-600 dark:bg-red-600 transition-all duration-1000"
                         style={{ width: `${Math.floor(Math.random() * 80) + 10}%` }} // Random mock progress
                     />
                 </div>
 
                 {/* Text Details */}
                 <div className="flex-1 w-full space-y-1 flex flex-col items-start text-left">
-                    <h3 className="text-sm font-bold text-gray-900 dark:text-white leading-snug line-clamp-2 min-h-[2.5rem] group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors duration-300">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white leading-snug line-clamp-2 min-h-[2.5rem] group-hover:text-red-600 dark:group-hover:text-red-300 transition-colors duration-300">
                         {book.title}
                     </h3>
 
-                    <p className="text-xs font-medium text-gray-500 dark:text-indigo-200/90 tracking-wide line-clamp-1">
+                    <p className="text-xs font-medium text-gray-500 dark:text-red-200/90 tracking-wide line-clamp-1">
                         {book.author || "Autor Desconhecido"}
                     </p>
                 </div>
@@ -129,7 +129,7 @@ export default function BookCard({ book }: { book: Book }) {
                 {book.download_url && (
                     <a
                         href={book.download_url}
-                        className="flex-1 flex items-center justify-center py-2 px-3 rounded-lg text-[11px] font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-indigo-600 dark:to-purple-600 hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 shadow-md active:scale-95"
+                        className="flex-1 flex items-center justify-center py-2 px-3 rounded-lg text-[11px] font-semibold text-white bg-gradient-to-r from-red-700 to-red-600 dark:from-red-600 dark:to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-md active:scale-95"
                     >
                         <Download className="w-3 h-3 mr-1" />
                         Baixar

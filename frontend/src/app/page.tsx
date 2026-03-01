@@ -5,6 +5,7 @@ import SearchBar from "@/components/SearchBar";
 import BookCard, { Book } from "@/components/BookCard";
 import CategoryTable from "@/components/CategoryTable";
 import TrendingList from "@/components/TrendingList";
+import StoicHeroBanner from "@/components/StoicHeroBanner";
 import HeaderNav from "@/components/HeaderNav";
 import { Search } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -114,7 +115,7 @@ function LibraryContent() {
 
       {isLoading && (
         <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-600"></div>
         </div>
       )}
 
@@ -125,7 +126,7 @@ function LibraryContent() {
       )}
 
       {!isLoading && !error && hasSearched && books.length === 0 && (
-        <div className="text-center py-24 bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm max-w-2xl mx-auto">
+        <div className="text-center py-24 bg-white dark:bg-[#141414] rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm max-w-2xl mx-auto">
           <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
             <Search className="w-8 h-8 text-gray-400" />
           </div>
@@ -136,7 +137,10 @@ function LibraryContent() {
 
       {/* Conditional Rendering: Grid vs Table vs Empty State */}
       {(!q || q === '') && !isCategoryMode && !isLoading && (
-        <TrendingList />
+        <>
+          <StoicHeroBanner />
+          <TrendingList />
+        </>
       )}
 
       {/* Conditionally render regular results if we have them */}
@@ -157,7 +161,7 @@ function LibraryContent() {
         <img
           src="/Gato de touca indignado.jpg"
           alt="Mulher pelo amor de deus meme"
-          className="w-56 md:w-72 rounded-3xl shadow-2xl shadow-purple-900/20 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 border-4 border-white/50 backdrop-blur-md pointer-events-auto"
+          className="w-56 md:w-72 rounded-3xl shadow-2xl shadow-red-900/20 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 border-4 border-white/50 backdrop-blur-md pointer-events-auto"
         />
       </div>
     </>
@@ -166,7 +170,7 @@ function LibraryContent() {
 
 export default function Home() {
   return (
-    <div className="flex-1 flex flex-col h-screen overflow-y-auto w-full bg-gray-50/50 dark:bg-[#0a0a0a]">
+    <div className="flex-1 flex flex-col h-screen overflow-y-auto w-full bg-gray-50/50 dark:bg-[#141414]">
       <HeaderNav />
       {/* Main Content Area */}
       <main className="flex-1 w-full max-w-[1600px] mx-auto px-8 py-8">

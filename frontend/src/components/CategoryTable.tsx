@@ -65,7 +65,7 @@ export default function CategoryTable({ books, categoryName }: CategoryTableProp
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/30 dark:bg-[#0a0a0a]/50 text-sm">
+                        <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/30 dark:bg-[#141414]/50 text-sm">
                             <th className="py-4 px-6 font-semibold text-gray-500 dark:text-gray-400 w-16">Nº</th>
                             <th className="py-4 px-6 font-semibold text-gray-500 dark:text-gray-400">Título & Capa</th>
                             <th className="py-4 px-6 font-semibold text-gray-500 dark:text-gray-400 w-48">Autor</th>
@@ -90,11 +90,11 @@ export default function CategoryTable({ books, categoryName }: CategoryTableProp
                                                 )}
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-1 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                                <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
                                                     {book.title}
                                                 </h3>
                                                 <div className="w-24 h-1 mt-2 rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden">
-                                                    <div className="h-full bg-purple-500" style={{ width: `${Math.floor(Math.random() * 80) + 10}%` }} />
+                                                    <div className="h-full bg-red-600" style={{ width: `${Math.floor(Math.random() * 80) + 10}%` }} />
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@ export default function CategoryTable({ books, categoryName }: CategoryTableProp
                                         {book.author || "Desconhecido"}
                                     </td>
                                     <td className="py-4 px-6">
-                                        <span className="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 text-xs font-medium rounded-full border border-indigo-100 dark:border-indigo-800/50">
+                                        <span className="px-2.5 py-1 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-xs font-medium rounded-full border border-red-100 dark:border-red-800/50">
                                             {book.source}
                                         </span>
                                     </td>
@@ -114,7 +114,7 @@ export default function CategoryTable({ books, categoryName }: CategoryTableProp
                                             </a>
                                         )}
                                         {book.download_url && (
-                                            <a href={book.download_url} className="inline-flex items-center justify-center p-2 rounded-lg text-white bg-purple-600 hover:bg-purple-700 shadow-sm transition-colors" title="Baixar livro">
+                                            <a href={book.download_url} className="inline-flex items-center justify-center p-2 rounded-lg text-white bg-red-600 hover:bg-red-700 shadow-sm transition-colors" title="Baixar livro">
                                                 <Download className="w-4 h-4" />
                                             </a>
                                         )}

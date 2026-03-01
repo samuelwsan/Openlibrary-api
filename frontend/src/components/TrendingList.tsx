@@ -48,7 +48,7 @@ export default function TrendingList() {
         return (
             <div className="w-full mb-12">
                 <div className="flex items-center gap-2 mb-6">
-                    <TrendingUp className="w-6 h-6 text-purple-600" />
+                    <TrendingUp className="w-6 h-6 text-red-600" />
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Os Mais Lidos</h2>
                 </div>
                 <div className="flex gap-6 overflow-hidden mt-6">
@@ -66,7 +66,7 @@ export default function TrendingList() {
         <div className="w-full mb-16 relative group">
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
-                    <TrendingUp className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                    <TrendingUp className="w-6 h-6 text-red-600 dark:text-red-500" />
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                         Destaques do Dia
                     </h2>
@@ -98,7 +98,7 @@ export default function TrendingList() {
                 {books.map((book, index) => (
                     <div key={book.id} className="snap-start snap-always shrink-0 group/card relative w-40 md:w-48 transition-transform duration-300 hover:-translate-y-2">
                         {/* Rank Number Overlay */}
-                        <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 text-white font-black text-xl flex items-center justify-center rounded-xl shadow-lg z-20 border-2 border-white dark:border-gray-900 rotate-[-10deg]">
+                        <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-red-600 to-red-600 text-white font-black text-xl flex items-center justify-center rounded-xl shadow-lg z-20 border-2 border-white dark:border-gray-900 rotate-[-10deg]">
                             #{index + 1}
                         </div>
 
@@ -124,7 +124,7 @@ export default function TrendingList() {
                                         href={book.preview_url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 bg-white/20 hover:bg-purple-600 text-white rounded-full flex items-center justify-center transition-colors shadow-lg backdrop-blur-md"
+                                        className="w-10 h-10 bg-white/20 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors shadow-lg backdrop-blur-md"
                                         title="Ler online"
                                     >
                                         <ExternalLink className="w-4 h-4" />
@@ -135,7 +135,7 @@ export default function TrendingList() {
                                         href={book.download_url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 bg-white/20 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-colors shadow-lg backdrop-blur-md"
+                                        className="w-10 h-10 bg-white/20 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors shadow-lg backdrop-blur-md"
                                         title="Baixar Livro"
                                     >
                                         <Download className="w-4 h-4" />
@@ -146,7 +146,7 @@ export default function TrendingList() {
 
                         {/* Book Info */}
                         <div className="px-1">
-                            <h3 className="font-bold text-gray-900 dark:text-white line-clamp-2 leading-tight group-hover/card:text-purple-600 dark:group-hover/card:text-purple-400 transition-colors">
+                            <h3 className="font-bold text-gray-900 dark:text-white line-clamp-2 leading-tight group-hover/card:text-red-600 dark:group-hover/card:text-red-500 transition-colors">
                                 {book.title}
                             </h3>
                             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
