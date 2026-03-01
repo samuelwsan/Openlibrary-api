@@ -118,7 +118,7 @@ export default function TrendingList() {
                             )}
 
                             {/* Hover Overlay actions */}
-                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[2px]">
+                            <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center gap-3 lg:inset-0 lg:bg-black/60 lg:opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 lg:items-center lg:backdrop-blur-[2px]">
                                 {book.preview_url && (
                                     <a
                                         href={book.preview_url}

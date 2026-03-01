@@ -107,13 +107,13 @@ export default function BookCard({ book }: { book: Book }) {
             </div>
 
             {/* Action Buttons Section */}
-            <div className="px-4 pb-4 bg-transparent flex gap-2 relative z-10 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 absolute bottom-0 left-0 w-full">
+            <div className="px-4 pb-4 bg-transparent flex gap-2 relative z-10 backdrop-blur-md opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 translate-y-0 lg:translate-y-2 lg:group-hover:translate-y-0 absolute bottom-0 left-0 w-full">
                 <button
                     onClick={toggleFavorite}
                     className="flex flex-shrink-0 items-center justify-center p-2 rounded-lg text-gray-400 bg-white dark:bg-white/10 hover:bg-red-50 dark:hover:bg-red-900/20 border border-gray-200 dark:border-white/10 transition-all duration-300 shadow-sm active:scale-95 group/heart"
                     title="Adicionar aos Favoritos"
                 >
-                    <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'group-hover/heart:text-red-500 transition-colors'}`} />
+                    <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'lg:group-hover/heart:text-red-500 transition-colors'}`} />
                 </button>
 
                 {book.preview_url && (
