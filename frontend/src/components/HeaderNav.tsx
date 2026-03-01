@@ -68,7 +68,7 @@ export default function HeaderNav() {
                     categorias.map((cat) => (
                         <Link
                             key={cat.id}
-                            href={`#${cat.nome.toLowerCase()}`}
+                            href={`/?q=${encodeURIComponent(cat.nome)}`}
                             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all shadow-sm hover:shadow-md
                 ${cat.adulto
                                     ? "bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/50 dark:hover:bg-red-900/40 relative overflow-hidden group"
