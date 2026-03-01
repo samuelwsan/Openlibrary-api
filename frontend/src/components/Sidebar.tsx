@@ -63,25 +63,31 @@ export default function Sidebar() {
             <div className="mt-auto space-y-4 pt-6 mt-8 border-t border-gray-200 dark:border-gray-800">
                 <div className="space-y-2">
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-2">
-                        Filtros
+                        Gêneros Populares
                     </p>
-                    <Link href="/?q=livre" className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800/50 rounded-lg transition-colors group cursor-pointer">
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
-                            <User className="w-4 h-4" />
-                            Público Geral
+                    <Link href="/?q=romance" className="flex items-center justify-between px-3 py-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors group cursor-pointer">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-3 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+                            <span className="text-lg">💝</span>
+                            Romance
                         </span>
-                        <div className="w-10 h-5 bg-blue-500 rounded-full flex items-center p-1 shadow-inner cursor-pointer">
-                            <div className="w-3.5 h-3.5 bg-white rounded-full translate-x-4.5 shadow-sm"></div>
-                        </div>
                     </Link>
-                    <Link href="/?q=dark" className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800/50 rounded-lg transition-colors group cursor-pointer">
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
-                            <Flame className="w-4 h-4 text-red-500" />
-                            Conteúdo Adulto
+                    <Link href="/?q=fantasia" className="flex items-center justify-between px-3 py-2 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-colors group cursor-pointer">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            <span className="text-lg">🐉</span>
+                            Fantasia
                         </span>
-                        <div className="w-10 h-5 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 shadow-inner cursor-pointer group-hover:bg-red-500 transition-colors">
-                            <div className="w-3.5 h-3.5 bg-white rounded-full shadow-sm transition-transform group-hover:translate-x-4.5"></div>
-                        </div>
+                    </Link>
+                    <Link href="/?q=dark" className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800/80 rounded-lg transition-colors group cursor-pointer">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-3 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                            <Flame className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                            Dark
+                        </span>
+                    </Link>
+                    <Link href="/?q=ficcao_cientifica" className="flex items-center justify-between px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors group cursor-pointer">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            <span className="text-lg">🚀</span>
+                            Ficção Científica
+                        </span>
                     </Link>
                 </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BookOpen, ExternalLink, Download, Globe, Heart } from "lucide-react";
 
 export interface Book {
@@ -16,10 +16,37 @@ export default function BookCard({ book }: { book: Book }) {
     const [isHovered, setIsHovered] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
 
+    // Initialize favorite status from localStorage when component mounts
+    useEffect(() => {
+        try {
+            const savedFavorites = JSON.parse(localStorage.getItem('openlibrary_favorites') || '[]');
+            setIsFavorite(savedFavorites.some((fav: Book) => fav.id === book.id));
+        } catch (e) {
+            console.error(e);
+        }
+    }, [book.id]);
+
     const toggleFavorite = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        setIsFavorite(!isFavorite);
+
+        try {
+            const savedFavorites = JSON.parse(localStorage.getItem('openlibrary_favorites') || '[]');
+
+            if (isFavorite) {
+                // Remove from favorites
+                const updatedStats = savedFavorites.filter((fav: Book) => fav.id !== book.id);
+                localStorage.setItem('openlibrary_favorites', JSON.stringify(updatedStats));
+                setIsFavorite(false);
+            } else {
+                // Add to favorites
+                savedFavorites.push(book);
+                localStorage.setItem('openlibrary_favorites', JSON.stringify(savedFavorites));
+                setIsFavorite(true);
+            }
+        } catch (e) {
+            console.error("Failed to save to favorites", e);
+        }
     };
 
     return (

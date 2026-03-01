@@ -17,10 +17,27 @@ function LibraryContent() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (q) {
+    if (q === 'favoritos') {
+      loadFavorites();
+    } else if (q) {
       handleSearch(q);
     }
   }, [q]);
+
+  const loadFavorites = () => {
+    setIsLoading(true);
+    setHasSearched(true);
+    setError(null);
+    try {
+      const savedFavorites = JSON.parse(localStorage.getItem('openlibrary_favorites') || '[]');
+      setBooks(savedFavorites);
+    } catch (e) {
+      console.error(e);
+      setError("Não foi possível carregar seus favoritos.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSearch = async (query: string) => {
     setIsLoading(true);
