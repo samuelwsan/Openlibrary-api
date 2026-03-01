@@ -159,9 +159,6 @@ function LibraryContent() {
           alt="Mulher pelo amor de deus meme"
           className="w-56 md:w-72 rounded-3xl shadow-2xl shadow-purple-900/20 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 border-4 border-white/50 backdrop-blur-md pointer-events-auto"
         />
-        <p className="mt-4 font-bold text-lg text-purple-200 tracking-wider pointer-events-auto drop-shadow-md">
-          &quot; Mucura e pe de Pato Y &gt; S
-        </p>
       </div>
     </>
   );
