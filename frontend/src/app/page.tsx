@@ -156,14 +156,6 @@ function LibraryContent() {
         )
       )}
 
-      {/* Easter Egg Meme */}
-      <div className="mt-28 flex flex-col items-center justify-center pointer-events-none opacity-90 transition-all hover:opacity-100 duration-500">
-        <img
-          src="/Gato de touca indignado.jpg"
-          alt="Mulher pelo amor de deus meme"
-          className="w-56 md:w-72 rounded-3xl shadow-2xl shadow-red-900/20 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 border-4 border-white/50 backdrop-blur-md pointer-events-auto"
-        />
-      </div>
     </>
   );
 }
