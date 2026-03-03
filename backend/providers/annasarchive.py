@@ -15,7 +15,7 @@ class AnnasArchiveProvider(BookProvider):
 
         async with httpx.AsyncClient() as client:
             try:
-                response = await client.get(url, params=params, headers=headers, timeout=15.0)
+                response = await client.get(url, params=params, headers=headers, timeout=30.0, follow_redirects=True)
                 response.raise_for_status()
                 html = response.text
             except Exception as e:
