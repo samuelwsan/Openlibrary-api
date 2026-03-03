@@ -37,42 +37,43 @@ class AnnasArchiveProvider(BookProvider):
             if md5 in seen_md5s:
                 continue
             
-            # Usually, there's a parent container (div or li) holding both the cover link and the info link
-            parent = link.find_parent('div', class_=lambda c: c and ('flex' in c or 'relative' in c)) or link.parent
-            if not parent:
-                continue
+            # Finding the full book card container because html.parser breaks on nested <a> tags
+            container = link.find_parent('div', class_=lambda c: c and 'mb-4' in c)
+            if not container:
+                container = link.find_parent('div', class_=lambda c: c and 'flex' in c) or link.parent
             
             # Finding cover image
-            img = parent.find('img')
+            img = container.find('img')
             cover_url = img.get('src') if img else None
             
-            # The title is usually in an h3, or it's the text of an <a> tag that is NOT the cover <a> tag
-            title = "Unknown Title"
-            author = "Unknown Author"
+            # Grab all texts in the container
+            texts = [t.strip() for t in container.stripped_strings if t.strip()]
             
-            # Grab all texts in the parent
-            texts = [t.strip() for t in parent.stripped_strings if t.strip()]
-            
-            h3 = parent.find('h3')
-            if h3:
-                title = h3.get_text(strip=True)
-                nxt = h3.find_next_sibling('div')
-                if nxt:
-                    author = nxt.get_text(strip=True)
-            else:
-                # If no h3 is found, look for texts. Often title is prominent. Let's just grab the first non-empty text that isn't too short
-                valid_texts = [t for t in texts if len(t) > 2]
-                if valid_texts:
-                    title = valid_texts[0]
-                if len(valid_texts) > 1:
-                    author = valid_texts[1][:100]
-                    
-            if title == "Unknown Title" or not title:
-                continue # skip if we really can't find a title
+            # Filter out UI elements and metadata
+            valid_texts = []
+            for t in texts:
+                t_lower = t.lower()
+                if 'base score' in t_lower or t == 'Save' or 'mb ·' in t_lower or 'read more…' in t_lower or t.startswith('✅') or t.startswith('🚀') or 'english [' in t_lower or 'portuguese [' in t_lower:
+                    continue
+                valid_texts.append(t)
                 
+            if not valid_texts:
+                continue
+                
+            # If the first text is a raw filename or path, skip it
+            first_text = valid_texts[0].lower()
+            if 'upload/' in first_text or 'lgli/' in first_text or first_text.endswith(('.epub', '.pdf', '.mobi', '.azw3', '.lit', '.txt')):
+                valid_texts = valid_texts[1:]
+                
+            if not valid_texts:
+                continue
+                
+            title = valid_texts[0]
+            author = valid_texts[1][:100] if len(valid_texts) > 1 else "Unknown Author"
+            
             seen_md5s.add(md5)
             
-            summary_str = " | ".join(texts[:5]) if texts else "Disponível no Anna's Archive."
+            summary_str = " | ".join(valid_texts[:4]) if valid_texts else "Disponível no Anna's Archive."
             if len(summary_str) > 200:
                 summary_str = summary_str[:197] + "..."
 
