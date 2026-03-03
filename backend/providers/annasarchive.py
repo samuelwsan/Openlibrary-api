@@ -6,7 +6,7 @@ from .base import BookProvider
 
 class AnnasArchiveProvider(BookProvider):
     async def search(self, query: str, limit: int = 20) -> List[schemas.BookDetails]:
-        url = "https://annas-archive.gl/search"
+        url = "https://annas-archive.li/search"
         params = {"q": query}
         
         headers = {
